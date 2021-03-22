@@ -16,5 +16,17 @@
 
 package com.example.android.guesstheword.screens.game
 
-// TODO (02) Create the GameViewModel class, extending ViewModel
-// TODO (03) Add init and override onCleared; Add log statements to both
+import androidx.lifecycle.ViewModel
+import timber.log.Timber
+
+class GameViewModel : ViewModel() {
+
+    init {
+        Timber.i("ViewModel created.")
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        Timber.i("onCleared called.")
+    }
+}

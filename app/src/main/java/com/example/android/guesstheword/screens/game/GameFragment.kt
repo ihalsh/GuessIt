@@ -67,6 +67,13 @@ class GameFragment : Fragment() {
             binding.wordText.text = newWord
         }
 
+        viewModel.isGameFinished.observe(this as LifecycleOwner) { isGameFinished ->
+            if (isGameFinished) {
+                gameFinished()
+                viewModel.gameFinishEventEnded()
+            }
+        }
+
         return binding.root
     }
 
@@ -76,6 +83,6 @@ class GameFragment : Fragment() {
     private fun gameFinished() {
         val action = GameFragmentDirections.actionGameToScore(viewModel.score.value ?: 0)
         findNavController(this).navigate(action)
+//        Toast.makeText(context, "Finished!", Toast.LENGTH_SHORT).show()
     }
-
 }

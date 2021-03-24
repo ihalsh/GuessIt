@@ -52,27 +52,21 @@ class GameFragment : Fragment() {
         Timber.i("Called ViewModelProvider")
         viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
 
-        binding.correctButton.setOnClickListener {
-            viewModel.onCorrect()
-        }
+        binding.gameViewModel = viewModel
 
-        binding.skipButton.setOnClickListener {
-            viewModel.onSkip()
-        }
-
-        viewModel.score.observe(this as LifecycleOwner) { newScore ->
+        viewModel.score.observe(viewLifecycleOwner) { newScore ->
             binding.scoreText.text = newScore.toString()
         }
 
-        viewModel.word.observe(this as LifecycleOwner) { newWord ->
+        viewModel.word.observe(viewLifecycleOwner) { newWord ->
             binding.wordText.text = newWord
         }
 
-        viewModel.timeLeft.observe(this as LifecycleOwner) {timeLeft ->
+        viewModel.timeLeft.observe(viewLifecycleOwner) {timeLeft ->
             binding.timerText.text = timeLeft
         }
 
-        viewModel.isGameFinished.observe(this as LifecycleOwner) { isGameFinished ->
+        viewModel.isGameFinished.observe(viewLifecycleOwner) { isGameFinished ->
             if (isGameFinished) {
                 gameFinished()
                 viewModel.gameFinishEventEnded()

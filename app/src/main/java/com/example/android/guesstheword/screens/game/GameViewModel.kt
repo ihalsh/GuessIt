@@ -48,7 +48,7 @@ class GameViewModel : ViewModel() {
     val timeLeft: LiveData<String>
         get() = _timeLeft
 
-    private val timer : CountDownTimer by lazy {
+    private val timer: CountDownTimer by lazy {
         object : CountDownTimer(COUNTDOWN_TIME, ONE_SECOND) {
 
             override fun onTick(millisUntilFinished: Long) {
@@ -122,7 +122,7 @@ class GameViewModel : ViewModel() {
     /** Methods for buttons presses **/
 
     fun onSkip() {
-        _score.value = _score.value?.minus(1)
+        _score.value = _score.value?.minus(1)?.coerceIn(0, Int.MAX_VALUE)
         nextWord()
     }
 

@@ -36,17 +36,18 @@ class GameViewModel : ViewModel() {
     val score: LiveData<Int>
         get() = _score
 
+    private val _timeLeft = MutableLiveData<String>()
+    val timeLeft: LiveData<String>
+        get() = _timeLeft
+
     // The game finished event
     private val _isGameFinished = MutableLiveData<Boolean>()
+
     val isGameFinished: LiveData<Boolean>
         get() = _isGameFinished
 
     // The list of words - the front of the list is the next word to guess
     private lateinit var wordList: MutableList<String>
-
-    private val _timeLeft = MutableLiveData<String>()
-    val timeLeft: LiveData<String>
-        get() = _timeLeft
 
     private val timer: CountDownTimer by lazy {
         object : CountDownTimer(COUNTDOWN_TIME, ONE_SECOND) {
